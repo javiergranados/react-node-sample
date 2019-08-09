@@ -1,0 +1,12 @@
+{
+  "name": "react-node-sample",
+  "version": "1.0.0",
+  "description": "Login screen with react and node",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jvgranados/react-node-sample.git"
+  },
+  "author": "jvgranados",
+  "license": "ISC"
+}
