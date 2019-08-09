@@ -1,12 +1,14 @@
 {
   "name": "react-node-sample",
-  "version": "1.0.0",
-  "description": "Login screen with react and node",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jvgranados/react-node-sample.git"
+  "version": "0.1.0",
+  "scripts": {
+    "server:frontend": "parcel frontend/public/index.html -p 3030"
   },
-  "author": "jvgranados",
-  "license": "ISC"
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3"
+  }
 }
