@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import api from "../utils/api";
 
 class Login extends Component {
   state = {
@@ -22,7 +23,7 @@ class Login extends Component {
     event.preventDefault();
     const username = this.username.current.value;
     const password = this.password.current.value;
-    console.log(username, password);
+    api.getUser(username, password);
 
     this.reset();
   };
