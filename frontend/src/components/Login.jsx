@@ -14,21 +14,21 @@ class Login extends Component {
 
   createRefs = () => {
     this.form = React.createRef();
-    this.user = React.createRef();
+    this.username = React.createRef();
     this.password = React.createRef();
   };
 
   submit = event => {
     event.preventDefault();
-    const user = this.user.current.value;
+    const username = this.username.current.value;
     const password = this.password.current.value;
-    console.log(user, password);
+    console.log(username, password);
 
     this.reset();
   };
 
   reset = () => {
-    this.user.current.focus();
+    this.username.current.focus();
     this.form.current.reset();
   };
 
@@ -43,11 +43,11 @@ class Login extends Component {
         onReset={this.reset}
       >
         <TextField
-          label="User"
+          label="username"
           variant="outlined"
           required
           autoFocus
-          inputRef={this.user}
+          inputRef={this.username}
         />
         <TextField
           label="Password"

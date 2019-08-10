@@ -21,7 +21,6 @@
 }
 .login-page--form--buttons {
   display: flex;
-  /* margin: 8px 8px 0 8px; */
   justify-content: flex-end;
 }
 .login-page--form--buttons .login-page--form--buttons__clear {
