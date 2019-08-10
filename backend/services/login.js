@@ -1,6 +1,5 @@
 function getUser(req, res) {
   console.log("PUT /api/login");
-  console.log(req.body);
 
   let status;
   let message;
