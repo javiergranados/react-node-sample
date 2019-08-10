@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import api from "../utils/api";
+import api from "../api";
 
 class Login extends Component {
   state = {
