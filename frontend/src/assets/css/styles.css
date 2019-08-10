@@ -5,12 +5,25 @@
   justify-content: center;
   flex-direction: column;
 }
-.login-page > div {
-  margin: 8px;
-  min-width: 400px;
-}
 .login-page h1 {
   color: #ffc0cb;
   font-size: 40px;
   font-family: fantasy;
+}
+.login-page--form {
+  display: flex;
+  flex-direction: column;
+}
+.login-page--form > div,
+.login-page--form--buttons {
+  margin: 8px;
+  min-width: 400px;
+}
+.login-page--form--buttons {
+  display: flex;
+  /* margin: 8px 8px 0 8px; */
+  justify-content: flex-end;
+}
+.login-page--form--buttons .login-page--form--buttons__clear {
+  margin-left: 10px;
 }
