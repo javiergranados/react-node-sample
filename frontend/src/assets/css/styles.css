@@ -1,0 +1,16 @@
+.login-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.login-page > div {
+  margin: 8px;
+  min-width: 400px;
+}
+.login-page h1 {
+  color: #ffc0cb;
+  font-size: 40px;
+  font-family: fantasy;
+}
