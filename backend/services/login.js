@@ -1,7 +1,7 @@
 const utils = require("../utils");
 
-function checkLogin(req, res) {
-  console.log("GET /api/login");
+function credentials(req, res) {
+  console.log("GET /api/credentials");
 
   const err =
     !utils.checkUsername(req.body.username) ||
@@ -20,7 +20,7 @@ function checkLogin(req, res) {
   res.status(status).send({ message });
 }
 
-function getUser(req, res) {
+function login(req, res) {
   console.log("PUT /api/login");
 
   if (!req.body.username || !req.body.password) {
@@ -29,10 +29,11 @@ function getUser(req, res) {
 
     res.status(status).send({ message });
   } else {
-    checkLogin(req, res);
+    credentials(req, res);
   }
 }
 
 module.exports = {
-  getUser
+  credentials,
+  login
 };

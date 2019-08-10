@@ -23,7 +23,7 @@ class Login extends Component {
     event.preventDefault();
     const username = this.username.current.value;
     const password = this.password.current.value;
-    api.getUser(username, password);
+    api.login(username, password);
 
     this.reset();
   };
