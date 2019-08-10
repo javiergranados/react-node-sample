@@ -1,5 +1,12 @@
 import axios from "axios";
 
+const credentials = (username, password) => {
+  axios
+    .get("http://localhost:3000/api/credentials", { username, password })
+    .then(response => response)
+    .catch(() => false);
+};
+
 const login = (username, password) => {
   axios
     .put("http://localhost:3000/api/login", { username, password })
@@ -7,4 +14,4 @@ const login = (username, password) => {
     .catch(error => console.log(error));
 };
 
-export default { login };
+export default { credentials, login };
