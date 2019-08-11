@@ -2,8 +2,8 @@ import axios from "axios";
 
 const credentials = (username, password) =>
   axios
-    .get("http://localhost:3000/api/credentials", { username, password })
-    .then(response => response)
+    .put("http://localhost:3000/api/credentials", { username, password })
+    .then(response => response.data.available)
     .catch(() => false);
 
 const login = (username, password) =>

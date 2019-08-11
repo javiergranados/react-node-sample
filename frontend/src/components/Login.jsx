@@ -1,13 +1,21 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import api from "../api";
 
 class Login extends Component {
   state = {
-    error: false,
-    disabled: false
+    disabled: true
   };
+
+  checkCredentials = _.debounce(async () => {
+    const result = await api.credentials(
+      this.username.current.value,
+      this.password.current.value
+    );
+    this.setState({ disabled: !result });
+  }, 500);
 
   componentWillMount() {
     this.createRefs();
@@ -21,10 +29,11 @@ class Login extends Component {
 
   submit = async event => {
     event.preventDefault();
-    const username = this.username.current.value;
-    const password = this.password.current.value;
+    const { response, error } = await api.login(
+      this.username.current.value,
+      this.password.current.value
+    );
 
-    const { response, error } = await api.login(username, password);
     this.showResponse(response, error);
     this.reset();
   };
@@ -43,7 +52,7 @@ class Login extends Component {
   };
 
   render() {
-    const { error, disabled } = this.state;
+    const { disabled } = this.state;
 
     return (
       <form
@@ -58,16 +67,15 @@ class Login extends Component {
           required
           autoFocus
           inputRef={this.username}
-          defaultValue="asdas#4"
+          onChange={this.checkCredentials}
         />
         <TextField
           label="Password"
           variant="outlined"
           required
           type="password"
-          error={error}
           inputRef={this.password}
-          defaultValue="12345678"
+          onChange={this.checkCredentials}
         />
         <span className="login-page--form--buttons">
           <Button
