@@ -3,6 +3,7 @@ import _ from "lodash";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import swal from "sweetalert";
 import api from "../api";
 
 class Login extends Component {
@@ -33,12 +34,12 @@ class Login extends Component {
     event.preventDefault();
     this.setState({ login: true });
 
-    const { response, error } = await api.login(
+    const { success, response } = await api.login(
       this.username.current.value,
       this.password.current.value
     );
 
-    this.showResponse(response, error);
+    this.showResponse(success, response);
     this.reset();
   };
 
@@ -47,13 +48,12 @@ class Login extends Component {
     this.form.current.reset();
   };
 
-  showResponse = (response, error) => {
+  showResponse = (success, response) => {
     this.setState({ login: false });
-    if (error) {
-      console.error(response);
-    } else {
-      console.log(response);
-    }
+    const title = (success && "Good job!") || "Oops";
+    const icon = (success && "success") || "error";
+
+    swal(title, response, icon);
   };
 
   render() {

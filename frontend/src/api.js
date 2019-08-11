@@ -9,7 +9,10 @@ const credentials = (username, password) =>
 const login = (username, password) =>
   axios
     .put("http://localhost:3000/api/login", { username, password })
-    .then(response => ({ response: response.data.message, error: false }))
-    .catch(error => ({ response: error.response.data.message, error: true }));
+    .then(response => ({ success: true, response: response.data.message }))
+    .catch(error => ({
+      success: false,
+      response: error.response.data.message
+    }));
 
 export default { credentials, login };

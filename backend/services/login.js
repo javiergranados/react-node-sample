@@ -13,7 +13,7 @@ function login(req, res) {
   let message;
   if (!req.body.username || !req.body.password) {
     status = 400;
-    message = "Faltan campos obligatorios";
+    message = "Required fields missed";
   } else {
     const available =
       utils.checkUsername(req.body.username) &&
@@ -21,10 +21,10 @@ function login(req, res) {
 
     if (available) {
       status = 200;
-      message = "Login correcto";
+      message = "Login successful";
     } else {
       status = 400;
-      message = "Error al realizar la petición";
+      message = "Something went wrong!";
     }
 
     setTimeout(() => {
