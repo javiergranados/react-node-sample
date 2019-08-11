@@ -27,7 +27,9 @@ function login(req, res) {
       message = "Error al realizar la petición";
     }
 
-    res.status(status).send({ message });
+    setTimeout(() => {
+      res.status(status).send({ message });
+    }, 2000);
   }
 }
 

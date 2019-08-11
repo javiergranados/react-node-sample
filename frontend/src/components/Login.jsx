@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import _ from "lodash";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import api from "../api";
 
 class Login extends Component {
   state = {
+    login: false,
     disabled: true
   };
 
@@ -15,7 +17,7 @@ class Login extends Component {
       this.password.current.value
     );
     this.setState({ disabled: !result });
-  }, 500);
+  }, 800);
 
   componentWillMount() {
     this.createRefs();
@@ -29,6 +31,8 @@ class Login extends Component {
 
   submit = async event => {
     event.preventDefault();
+    this.setState({ login: true });
+
     const { response, error } = await api.login(
       this.username.current.value,
       this.password.current.value
@@ -44,6 +48,7 @@ class Login extends Component {
   };
 
   showResponse = (response, error) => {
+    this.setState({ login: false });
     if (error) {
       console.error(response);
     } else {
@@ -52,7 +57,17 @@ class Login extends Component {
   };
 
   render() {
-    const { disabled } = this.state;
+    const { login, disabled } = this.state;
+    const primaryButton = (!login && (
+      <Button
+        type="submit"
+        variant="outlined"
+        color="primary"
+        disabled={disabled}
+      >
+        Submit
+      </Button>
+    )) || <CircularProgress />;
 
     return (
       <form
@@ -78,14 +93,7 @@ class Login extends Component {
           onChange={this.checkCredentials}
         />
         <span className="login-page--form--buttons">
-          <Button
-            type="submit"
-            variant="outlined"
-            color="primary"
-            disabled={disabled}
-          >
-            Submit
-          </Button>
+          {primaryButton}
           <Button
             type="reset"
             variant="outlined"
