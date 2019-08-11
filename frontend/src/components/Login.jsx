@@ -4,12 +4,17 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import swal from "sweetalert";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import api from "../api";
 
 class Login extends Component {
   state = {
     login: false,
-    disabled: true
+    disabled: true,
+    showPassword: false
   };
 
   checkCredentials = _.debounce(async () => {
@@ -44,6 +49,7 @@ class Login extends Component {
   };
 
   reset = () => {
+    this.setState({ showPassword: false });
     this.username.current.focus();
     this.form.current.reset();
   };
@@ -57,7 +63,8 @@ class Login extends Component {
   };
 
   render() {
-    const { login, disabled } = this.state;
+    const { login, disabled, showPassword } = this.state;
+
     const primaryButton = (!login && (
       <Button
         type="submit"
@@ -68,6 +75,18 @@ class Login extends Component {
         Submit
       </Button>
     )) || <CircularProgress />;
+
+    const passwordIcon = (
+      <InputAdornment position="end">
+        <IconButton
+          edge="end"
+          onClick={() => this.setState({ showPassword: !showPassword })}
+          onMouseDown={event => event.preventDefault()}
+        >
+          {showPassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton>
+      </InputAdornment>
+    );
 
     return (
       <form
@@ -88,9 +107,14 @@ class Login extends Component {
           label="Password"
           variant="outlined"
           required
-          type="password"
+          type={showPassword ? "text" : "password"}
           inputRef={this.password}
           onChange={this.checkCredentials}
+          onMouseDown={() => this.setState({ showPassword: true })}
+          onMouseUp={() => this.setState({ showPassword: false })}
+          InputProps={{
+            endAdornment: passwordIcon
+          }}
         />
         <span className="login-page--form--buttons">
           {primaryButton}
