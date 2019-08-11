@@ -110,8 +110,14 @@ class Login extends Component {
           type={showPassword ? "text" : "password"}
           inputRef={this.password}
           onChange={this.checkCredentials}
-          onMouseDown={() => this.setState({ showPassword: true })}
-          onMouseUp={() => this.setState({ showPassword: false })}
+          onMouseDown={event =>
+            event.target.nodeName === "INPUT" &&
+            this.setState({ showPassword: true })
+          }
+          onMouseUp={event =>
+            event.target.nodeName === "INPUT" &&
+            this.setState({ showPassword: false })
+          }
           InputProps={{
             endAdornment: passwordIcon
           }}
