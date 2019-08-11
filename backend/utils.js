@@ -4,12 +4,12 @@ function checkRegex(str, expression) {
 }
 
 function checkUsername(username) {
-  const expression = String.raw`/\w+#\d+/g`;
+  const expression = String.raw`\w+#\d+`;
   return checkRegex(username, expression);
 }
 
 function checkPassword(password) {
-  const expression = String.raw`/\w{8,}/g`;
+  const expression = String.raw`\w{8,}`;
   return checkRegex(password, expression);
 }
 

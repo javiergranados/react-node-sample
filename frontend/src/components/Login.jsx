@@ -19,18 +19,27 @@ class Login extends Component {
     this.password = React.createRef();
   };
 
-  submit = event => {
+  submit = async event => {
     event.preventDefault();
     const username = this.username.current.value;
     const password = this.password.current.value;
-    api.login(username, password);
 
+    const { response, error } = await api.login(username, password);
+    this.showResponse(response, error);
     this.reset();
   };
 
   reset = () => {
     this.username.current.focus();
     this.form.current.reset();
+  };
+
+  showResponse = (response, error) => {
+    if (error) {
+      console.error(response);
+    } else {
+      console.log(response);
+    }
   };
 
   render() {
@@ -49,6 +58,7 @@ class Login extends Component {
           required
           autoFocus
           inputRef={this.username}
+          defaultValue="asdas#4"
         />
         <TextField
           label="Password"
@@ -57,6 +67,7 @@ class Login extends Component {
           type="password"
           error={error}
           inputRef={this.password}
+          defaultValue="12345678"
         />
         <span className="login-page--form--buttons">
           <Button
